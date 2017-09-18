@@ -25,14 +25,14 @@ ActiveRecord::Schema.define(version: 20170918034322) do
   end
 
   create_table "choices", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "feedback_id"
-    t.uuid     "answer_id"
+    t.uuid     "feedback_id", null: false
+    t.uuid     "answer_id",   null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   create_table "feedbacks", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "survey_id"
+    t.uuid     "survey_id",  null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

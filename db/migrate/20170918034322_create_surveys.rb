@@ -27,15 +27,15 @@ class CreateSurveys < ActiveRecord::Migration[5.0]
     add_foreign_key :answers, :questions, column: :next_question_id
 
     create_table :feedbacks, id: :uuid do |t|
-      t.uuid :survey_id
+      t.uuid :survey_id, null: false
 
       t.timestamps
     end
     add_foreign_key :feedbacks, :surveys
 
     create_table :choices, id: :uuid do |t|
-      t.uuid :feedback_id
-      t.uuid :answer_id
+      t.uuid :feedback_id, null: false
+      t.uuid :answer_id,   null: false
 
       t.timestamps
     end
