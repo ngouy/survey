@@ -13,3 +13,7 @@
 There are some instance/class methods to create/update surveys/questionnary and answers.
 
 A user answer a survey through Feedback model (interface isn't provided here but Feedbacks model's methods)
+
+The seed file isn't appropriate, but I populate the databse in order to have data to display through API
+
+I ran out of time to did this API with JSON API spec, but ideally it must be done with it.
