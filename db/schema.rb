@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170918034322) do
+ActiveRecord::Schema.define(version: 20170918050904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20170918034322) do
     t.string   "text",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "position",   null: false
+    t.index ["survey_id", "position"], name: "unique_survey_id_and_position_on_questions", unique: true, using: :btree
     t.index ["survey_id", "text"], name: "index_questions_on_survey_id_and_text", unique: true, using: :btree
   end
 
