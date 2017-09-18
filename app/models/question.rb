@@ -24,6 +24,7 @@ class Question < ApplicationRecord
   end
 
   def switch_position(question)
+    return if question.survey_id != self.survey_id
     ActiveRecord::Base.transaction do
       ActiveRecord::Base.connection.execute('SET CONSTRAINTS unique_survey_id_and_position_on_questions DEFERRED')
       old_position = self.position
