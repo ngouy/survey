@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- git clone this repo
+- use ruby 2.4.1 (`$> rvm use ruby-2.4.1`)
+- `$> bundle install`
+- `$> rake db:create ; rake  db:migrate ; rake  db:seed`
+- `$> rails s`
+- there are 6 enpoints
+  - app/feedbacks(/:feedback_id)
+  - app/surveys(/:survey_id)
+  - app/questions(/:question_id)
 
-Things you may want to cover:
+There are some instance/class methods to create/update surveys/questionnary and answers.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+A user answer a survey through Feedback model (interface isn't provided here but Feedbacks model's methods)
