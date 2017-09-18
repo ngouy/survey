@@ -5,8 +5,17 @@ class Feedback < ApplicationRecord
 
   validates_presence_of :survey_id
 
+  def completed?
+    !!self.completed_at
+  end
+
   def new_answer(answer)
     Choice.create!(feedback: self, answer: answer)
+    if answer.is_leaf?
+      self.update_attributes(completed_at: DateTime.now)
+    else
+      self.update_attributes(completed_at: nil)
+    end
   end
 
   def next_question
