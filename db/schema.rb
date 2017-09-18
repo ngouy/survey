@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20170918034322) do
     t.string   "text",             null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["text", "question_id"], name: "index_answers_on_text_and_question_id", unique: true, using: :btree
   end
 
   create_table "choices", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 20170918034322) do
     t.uuid     "answer_id",   null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["feedback_id", "answer_id"], name: "index_choices_on_feedback_id_and_answer_id", unique: true, using: :btree
   end
 
   create_table "feedbacks", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -42,12 +44,14 @@ ActiveRecord::Schema.define(version: 20170918034322) do
     t.string   "text",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["survey_id", "text"], name: "index_questions_on_survey_id_and_text", unique: true, using: :btree
   end
 
   create_table "surveys", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.text     "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_surveys_on_name", unique: true, using: :btree
   end
 
   add_foreign_key "answers", "questions"
