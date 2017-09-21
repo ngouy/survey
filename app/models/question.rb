@@ -39,4 +39,14 @@ class Question < ApplicationRecord
     question_1.switch_position(question_2)
   end
 
+  def sub_tree
+    self_as_json = self.as_json
+    self_as_json[:answers] = answers.map do |answer|
+      answer_as_json = answer.as_json
+      answer_as_json[:next_question] = Question.find_by(id: answer.next_question_id).try :sub_tree
+      answer_as_json
+    end
+    self_as_json
+  end
+
 end

@@ -8,4 +8,8 @@ class SurveysController < ApplicationController
     render json: Survey.where(id: params[:id]).first, include: :questions
   end
 
+  def tree
+    render json: Survey.find(params[:id]).ordered_questions.first.sub_tree
+  end
+
 end
