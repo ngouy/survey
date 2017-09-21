@@ -6,26 +6,23 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+
 survey = Survey.create!(name: "Test Survey")
 
-survey.add_questions([
-  "question_0",
-  "question_1",
-  "question_2",
-  "question_3",
-]);
-
-questions = survey.ordered_questions
-
-3.times do |question_index|
-  4.times { |index| questions[question_index].add_answer("question_#{question_index}_answer_#{index}", next_question_id: questions[question_index + 1].id) }
+def get_question(answer_id, depth, survey, answer_count=nil)
+  answer_count ||= rand(5 - depth)
+  return nil if answer_count == 0
+  question = survey.add_question("question_#{depth}_from_answer#{answer_id}")
+  [answer_count, 2].max.times do |index|
+    answer = question.add_answer "question_#{question.id}_answer_#{index}"
+    answer.next_question = get_question(answer.id, depth + 1, survey)
+    answer.save!
+  end
+  question
 end
 
-4.times { |index| questions[3].add_answer "question_3_answer_#{index}" }
-
-# make the last first question's answer a leaf
-questions.first.answers.last.update_attributes(next_question_id: nil)
-
+get_question("first_question", 0, survey, 4)
 
 10.times do
   feedback = Feedback.create!(survey: survey)
