@@ -5,10 +5,12 @@
 - `$> bundle install`
 - `$> rake db:create ; rake  db:migrate ; rake  db:seed`
 - `$> rails s`
-- there are 6 enpoints
+- there are 8 enpoints
   - app/feedbacks(/:feedback_id)
   - app/surveys(/:survey_id)
   - app/questions(/:question_id)
+  - app/survey_trees/:survey_id
+  - app/question_sub_trees/:question_id
 
 There are some instance/class methods to create/update surveys/questionnary and answers.
 

@@ -11,6 +11,6 @@ Rails.application.routes.draw do
 
 
   get 'survey_trees/:id'       => 'surveys#tree'
-  get 'question_sub_trees/:id' => 'questions#tree'
+  get 'question_sub_trees/:id' => 'questions#sub_tree'
 
 end
